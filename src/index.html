@@ -364,23 +364,16 @@
 			initDataTable();
 			SyntaxHighlighter.all();
 			$("#tab1").click(); // ColorPickerの接続漏れ対策
+			
+			// 
+			// ソース生成機能のポップアップ
+			// 
+			initCreateSrc();
 		
 			// 
 			// インポート機能のポップアップ
 			// 
-			var d = $('#dialog');
-
-			// 1ダイアログを初期化（自動オープンしない）
-			d.dialog({
-				modal: true,
-				width: 640,
-				autoOpen: false
-			});
-
-			// ボタン・クリック時にダイアログを開く
-			$('#impstbtn').click(function(e){
-				d.dialog('open');
-			});
+			initImportTable();
 		});
 	</script>
 </head>
@@ -747,6 +740,7 @@
 			</table>
 			<div>
 				<button id="impstbtn">インポート</button>
+				<button id="srcbtn">ソース生成</button>
 			</div>
 		</div>
 	</div>
@@ -809,17 +803,12 @@
 			<h8>※コンピュータやブラウザの性能に左右されるため点灯周期やタイミングは異なりますのでご注意ください。<br>※明度はシミュレータ上で見やすいようにオフセットが加算されています。実際の明るさとは異なります。</h8>
 		</div>
 	</div>
-	<div class="col_12 column">
-		<ul class="tabs">
-			<li class="first last current">
-				<a href="#code">自動生成プログラムリスト</a>
-			</li>
-		</ul>
-		<div id="code" class="tab-content clearfix" style="display: block; ">
-			<button onclick="create_src()">生成</button>
+
+	<!-- ソース生成モーダルダイアログ -->
+	<div id="createsrcdlg" title="　　生成ソースコード">
+		<div id="code" style="display: block; ">
 		  <div>
-				<h8>※ソースコードは、自動更新されませんので必要なタイミングで生成ボタンを押下してください。</h8>
-				<h8>※全体もしくは、生成テーブル部分をコピーしてご利用ください。</h8>
+				<h8>生成されたソースコードをコピーし、Arduino IDEに張り付けてご利用ください。</h8>
 		  </div>
 			<div id="preWrapper">
 				<pre class="brush: c; toolbar: false;">
@@ -831,8 +820,8 @@
 		</div>
 	</div>
 
-	<!-- モーダルダイアログ　-->
-	<div id="dialog" title="　　インポート処理">
+	<!-- インポートモーダルダイアログ -->
+	<div id="importdlg" title="　　インポート処理">
 		<div>
 			<h6>LED演出用テーブルが含まれたC言語のコードを張り付けてください。</h6>
 		</div>

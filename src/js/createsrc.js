@@ -4,6 +4,27 @@
 // 
 
 // 
+// ソースコード生成処理の初期化
+// 
+function initCreateSrc(){
+	var d = $('#createsrcdlg');
+
+	// 1ダイアログを初期化（自動オープンしない）
+	d.dialog({
+		modal: true,
+		width: 800,
+		autoOpen: false
+	});
+
+	// ボタン・クリック時にダイアログを開く
+	$('#srcbtn').click(function(e){
+		$("#code pre").text("");
+		d.dialog('open');
+		create_src();
+	});
+}
+
+// 
 // コードの生成処理（ひな形の取得）
 // 
 function create_src(){

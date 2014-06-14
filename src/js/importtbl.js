@@ -4,6 +4,25 @@
 // 
 
 // 
+// インポート処理初期化
+// 
+function initImportTable() {
+	var d = $('#importdlg');
+
+	// 1ダイアログを初期化（自動オープンしない）
+	d.dialog({
+		modal: true,
+		width: 640,
+		autoOpen: false
+	});
+
+	// ボタン・クリック時にダイアログを開く
+	$('#impstbtn').click(function(e){
+		d.dialog('open');
+	});
+}
+
+// 
 // テーブルインポート処理
 // 
 function import_tbl(){
