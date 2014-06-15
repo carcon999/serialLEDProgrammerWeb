@@ -274,7 +274,8 @@
 			var indexSelected = $('tr.selected').index();
 			
 			// 選択されている場合のみ処理する。
-			if(indexSelected != undefined){
+			if(indexSelected > 0){
+			
 				// テーブルからコマンドオブジェクトを生成する
 				var oTable = $('#example').dataTable();
 				// 選択コマンドの情報を取得する。
