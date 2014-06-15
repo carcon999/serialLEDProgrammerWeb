@@ -270,8 +270,40 @@
 		// 
 		// TODO
 		function get() {
+			// 選択行インデックスを待避
+			var indexSelected = $('tr.selected').index();
+			
+			// 選択されている場合のみ処理する。
+			if(indexSelected != undefined){
+				// テーブルからコマンドオブジェクトを生成する
+				var oTable = $('#example').dataTable();
+				// 選択コマンドの情報を取得する。
+				var cmd = CmdFromJson(JSON.parse(oTable.fnGetData(indexSelected, 10)));
+				// コマンドが存在する場合のみ処理
+				if(cmd != undefined){
+					restoreCmd(cmd);
+				}
+				//console.log("index = " + indexSelected);
+				//console.log(cmd);
+			}
+		}
+
+		// 
+		// 上移動
+		// 
+		// TODO
+		function up() {
 			// あとで
-			alert("TODO: 'GET'");
+			alert("TODO: 'UP'");
+		}
+
+		// 
+		// 下移動
+		// 
+		// TODO
+		function down() {
+			// あとで
+			alert("TODO: 'DOWN'");
 		}
 		
 		// 
@@ -715,6 +747,9 @@
 				<tr><button onclick="replace()">上書</button></tr><!-- 選択しているレコードに上書き -->
 				<tr><button onclick="get()">取得</button></tr><!-- レコードから設定ペインに復元 -->
 				<tr><button onclick="dele()">削除</button></tr><!-- 選択レコードを削除 -->
+				<tr>　　</tr><!-- 区切り -->
+				<tr><button onclick="up()">↑[上移動]</button></tr><!-- 選択レコードを上へ -->
+				<tr><button onclick="down()">↓[下移動]</button></tr><!-- 選択レコードを下へ -->
 			</table>
 			<div>
 				<h8>リストの上から下の流れでLED演出します。※先頭行には、システム設定(System)パラメータを入れてください。</h8>

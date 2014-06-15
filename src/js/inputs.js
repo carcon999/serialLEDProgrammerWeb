@@ -161,3 +161,145 @@ function restore(tgt, src){
 		idx++;
 	}
 }
+
+// 
+// コマンドから対応するタブを選択・反映する。
+// 
+function restoreCmd(cmd){
+	switch (cmd.name) {
+		case "system":
+			restoreCmdSystem(cmd); break;
+		case "color":
+			restoreCmdColor(cmd);  break;
+		case "wait":
+			restoreCmdDelay(cmd);  break;
+		case "shift":
+			restoreCmdShift(cmd);  break;
+		case "rainbow":
+			restoreCmdRainbow(cmd); break;
+		case "bar":
+			restoreCmdBar(cmd); break;
+		case "seesaw":
+			restoreCmdSeesaw(cmd); break;
+		case "loop":
+			restoreCmdLoop(cmd); break;
+		default:
+			alert("default");
+	}
+	
+	// 指定のTABを選択する。（TBD）
+	
+}
+
+function restoreCmdSystem(cmd){
+	var src = [];
+	src[0] = cmd.ledtype;
+	src[1] = cmd.length;
+	src[2] = cmd.wait;
+	
+	var tgt = $("#list-1 input, #list-1 select");
+	restore(tgt, src);
+}
+
+function restoreCmdColor(cmd){
+	// there are checkboxes..
+	var tgt1 = $("#list-2 input, #list-2 select").slice(0,5);
+	var tgt2 = $("#list-2 input, #list-2 select").filter(":checkbox");
+
+	// text fields and single checkboxes defaults
+	tgt1.eq(0).val(cmd.h);
+	tgt1.eq(1).val(cmd.s);
+	tgt1.eq(2).val(cmd.v);
+	tgt1.eq(3).prop('checked', cmd.tr);
+	tgt1.eq(4).prop('checked', cmd.off);
+
+	// ビット変換
+  var target = cmd.target;
+  var str = "";
+	for(var i = 0 ; i < MAX_LED ; i++){
+		if((target & 0x0001) != 0){
+			str += "1";
+		}else{
+			str += "0";
+		}
+		target >>= 1;
+	}
+	console.log(str);
+
+	if (str.length != MAX_LED) {alert("invalid configuration [defaults.SLEDPDefaults.color.length]")}
+	for (var i=0; i<str.length; i++) {
+		if ("0" == str[i]) {ledArrayBools[i] = false;}
+		else {ledArrayBools[i] = true;}
+	}
+
+	// don't forget updateViewLeds() !
+	updateViewLeds();
+}
+
+function restoreCmdDelay(cmd){
+	var src = [];
+	src[0] = cmd.wait;
+	var tgt = $("#list-3 input");
+	restore(tgt, src);
+}
+
+function restoreCmdShift(cmd){
+	var src = [];
+	src[0] = cmd.dir;
+	src[1] = cmd.mode;
+	src[2] = cmd.wait;
+	src[3] = cmd.count;
+	var tgt = $("#list-4 input, #list-4 select");
+	restore(tgt, src);
+}
+
+function restoreCmdRainbow(cmd){
+	var src = [];
+	src[0] = cmd.bright;
+	src[1] = cmd.mode;
+	src[2] = cmd.wait;
+	src[3] = cmd.loop;
+	var tgt = $("#list-5 input, #list-5 select");
+	restore(tgt, src);
+}
+
+function restoreCmdBar(cmd){
+	// there are checkboxes..
+	
+	var tgt1 = $("#list-6 input, #list-6 select").slice(0,4); // 4 elems
+	var tgt2 = $("#list-6 input, #list-6 select").slice(4,6); // 2 checkboxes
+	var tgt3 = $("#list-6 input, #list-6 select").slice(6,9); // 3 elems
+	
+	// text fields and pulldown defaults
+	tgt1.eq(0).val(cmd.h);
+	tgt1.eq(1).val(cmd.s);
+	tgt1.eq(2).val(cmd.v);
+	tgt1.eq(3).val(cmd.flag & 0x0001);
+	tgt3.eq(0).val(cmd.shiftwait);
+	tgt3.eq(1).val(cmd.showwait);
+	tgt3.eq(2).val(cmd.loop);
+
+	tgt2.eq(0).prop('checked', (cmd.flag & 0x0002));
+	tgt2.eq(1).prop('checked', (cmd.flag & 0x0004));
+}
+
+function restoreCmdSeesaw(cmd){
+	// text fields defaults
+
+	var tgt1 = $("#list-7 input").not(":checkbox");
+	tgt1.eq(0).val(cmd.bright);
+	tgt1.eq(1).val(cmd.wait);
+	tgt1.eq(2).val(cmd.loop);
+
+	var tgt2 = $("#list-7 input").filter(":checkbox");
+	tgt2.eq(0).prop('checked', (cmd.rgbflag & 0x0001));
+	tgt2.eq(1).prop('checked', (cmd.rgbflag & 0x0002));
+	tgt2.eq(2).prop('checked', (cmd.rgbflag & 0x0004));
+}
+
+function restoreCmdLoop(cmd){
+	var src = [];
+	src[0] = cmd.count;
+	var tgt = $("#list-8 input");
+	restore(tgt, src);
+}
