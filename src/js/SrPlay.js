@@ -51,6 +51,9 @@ function PlayInfo(cmd)
     this.led.push(led);
   }
 
+  // 利用するLED数の最大数をチックする。
+  this.ledlen = getLedCountMax(cmd);
+
   return this;
 }
 
@@ -513,3 +516,24 @@ function add_bright_offset(val){
   return ret;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// 利用するLED数を求める。
+////////////////////////////////////////////////////////////////////////////////
+function getLedCountMax(cmd){
+	var count = 0;
+
+	for(var i = 0 ; i < cmd.length ; i++)
+	{
+		if(cmd[i].name == "system"){
+			if(count < cmd[i].length){
+				count = cmd[i].length;
+			}
+		}
+	}
+
+	if(count == 0){
+		count = ledsToUse;
+	}
+	
+	return count;
+}

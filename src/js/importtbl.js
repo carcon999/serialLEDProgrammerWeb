@@ -95,7 +95,7 @@ function import_tbl(){
 		}
 		
 		// ダイアログを閉じる
-		$( "#dialog" ).dialog( "close" );
+		$( "#importdlg" ).dialog( "close" );
 	}
 
 }

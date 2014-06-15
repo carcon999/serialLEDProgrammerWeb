@@ -365,14 +365,13 @@
 			SyntaxHighlighter.all();
 			$("#tab1").click(); // ColorPickerの接続漏れ対策
 			
-			// 
-			// ソース生成機能のポップアップ
-			// 
+			// LEDシミュレーション機能のポップアップ初期化
+			initLedSimulation();
+			
+			// ソース生成機能のポップアップ初期化
 			initCreateSrc();
 		
-			// 
-			// インポート機能のポップアップ
-			// 
+			// インポート機能のポップアップ初期化
 			initImportTable();
 		});
 	</script>
@@ -740,6 +739,7 @@
 			</table>
 			<div>
 				<button id="impstbtn">インポート</button>
+				<button id="simbtn">演出確認</button>
 				<button id="srcbtn">ソース生成</button>
 			</div>
 		</div>
@@ -750,15 +750,10 @@
 <!-- -- -- Bottom            -- -- -- -->
 <!-- -- -- -- -- -- -- -- -- -- -- -- -->
 <div>
-	<div class="col_12 column">
-		<ul class="tabs">
-			<li class="first last current">
-				<a href="#simulator">LEDシミュレーション</a>
-			</li>
-		</ul>
-		<div id="simulator" class="tab-content clearfix" style="display: block; ">
-			<button onclick="led_play()">再生</button>
-			<button onclick="led_stop()">停止</button>
+	<div id="simdlg" title="　　LEDシミュレーション">
+		<div id="simulator" style="display: block; ">
+<!--			<button onclick="led_play()">再生</button>	-->
+<!--			<button onclick="led_stop()">停止</button>	-->
 			<svg width="140%" height="32">
 				<!-- 影をつけるための定義 -->
 				<defs>
