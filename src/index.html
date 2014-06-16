@@ -270,11 +270,12 @@
 		// 
 		// TODO
 		function get() {
+
 			// 選択行インデックスを待避
-			var indexSelected = $('tr.selected').index();
-			
+			var indexSelected = $('#example').DataTable().row('.selected').index();
+
 			// 選択されている場合のみ処理する。
-			if(indexSelected > 0){
+			if(indexSelected >= 0){
 			
 				// テーブルからコマンドオブジェクトを生成する
 				var oTable = $('#example').dataTable();
@@ -284,8 +285,6 @@
 				if(cmd != undefined){
 					restoreCmd(cmd);
 				}
-				//console.log("index = " + indexSelected);
-				//console.log(cmd);
 			}
 		}
 
@@ -317,7 +316,7 @@
 			var indexSelected = $('tr.selected').index();
 			
 			// 行削除
-			api.row('.selected').remove().draw( false );
+			api.row('.selected').remove().draw();
 			
 			// 選択対象行の判定〜行選択
 			indexLast = api.data().length -1

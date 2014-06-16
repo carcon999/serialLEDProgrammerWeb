@@ -166,29 +166,48 @@ function restore(tgt, src){
 // コマンドから対応するタブを選択・反映する。
 // 
 function restoreCmd(cmd){
+	var idx = -1;
 	switch (cmd.name) {
 		case "system":
-			restoreCmdSystem(cmd); break;
+			idx = 0;
+			restoreCmdSystem(cmd);
+			break;
 		case "color":
-			restoreCmdColor(cmd);  break;
+			idx = 1;
+			restoreCmdColor(cmd);
+			break;
 		case "wait":
-			restoreCmdDelay(cmd);  break;
+			idx = 2;
+			restoreCmdDelay(cmd);
+			break;
 		case "shift":
-			restoreCmdShift(cmd);  break;
+			idx = 3;
+			restoreCmdShift(cmd);
+			break;
 		case "rainbow":
-			restoreCmdRainbow(cmd); break;
+			idx = 4;
+			restoreCmdRainbow(cmd);
+			break;
 		case "bar":
-			restoreCmdBar(cmd); break;
+			idx = 5;
+			restoreCmdBar(cmd);
+			break;
 		case "seesaw":
-			restoreCmdSeesaw(cmd); break;
+			idx = 6;
+			restoreCmdSeesaw(cmd);
+			break;
 		case "loop":
-			restoreCmdLoop(cmd); break;
+			idx = 7;
+			restoreCmdLoop(cmd);
+			break;
 		default:
 			alert("default");
 	}
-	
-	// 指定のTABを選択する。（TBD）
-	
+
+	// 対象TABのクリック（選択）
+	if(idx >= 0){
+		$("#ControlCommands a").eq(idx).click();
+	}
 }
 
 function restoreCmdSystem(cmd){
@@ -224,7 +243,7 @@ function restoreCmdColor(cmd){
 		}
 		target >>= 1;
 	}
-	console.log(str);
+//	console.log(str);
 
 	if (str.length != MAX_LED) {alert("invalid configuration [defaults.SLEDPDefaults.color.length]")}
 	for (var i=0; i<str.length; i++) {
@@ -255,8 +274,8 @@ function restoreCmdShift(cmd){
 
 function restoreCmdRainbow(cmd){
 	var src = [];
-	src[0] = cmd.bright;
-	src[1] = cmd.mode;
+	src[0] = cmd.mode;
+	src[1] = cmd.bright;
 	src[2] = cmd.wait;
 	src[3] = cmd.loop;
 	var tgt = $("#list-5 input, #list-5 select");
