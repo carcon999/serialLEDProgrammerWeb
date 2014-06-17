@@ -45,12 +45,16 @@ function led_play(){
 
 	var cmdArray = [];
 
-	// テーブルからコマンドオブジェクトを生成する
-	var oTable = $('#example').dataTable();
-	$.each( oTable.fnGetData(), function(i, row){
+	// データのソート処理
+	var api = $('#example').DataTable();
+	var data = api.data();
+	xsort(data, 0, 1);
+
+  // テーブルからコマンドオブジェクトを生成する
+	for(var i = 0 ; i < data.length ; i++){
 		// Remarksに入っているjsonを取得
-		cmdArray[i] = CmdFromJson(JSON.parse(row[10]));
-	});
+		cmdArray.push(CmdFromJson(JSON.parse(data[i][10])));
+	}
 
 	// データが存在する場合のみ実施する。
 	if(cmdArray.length != 0){
