@@ -293,8 +293,7 @@
 		// 
 		// TODO
 		function up() {
-			// あとで
-			alert("TODO: 'UP'");
+			updown(-15);
 		}
 
 		// 
@@ -302,8 +301,31 @@
 		// 
 		// TODO
 		function down() {
+			updown(15);
+		}
+		
+		// 
+		// 上下移動処理
+		// 
+		function updown(offset) {
 			// あとで
-			alert("TODO: 'DOWN'");
+			// 選択行インデックスを待避
+			var indexSelected = $('#example').DataTable().row('.selected').index();
+
+			// 選択されている場合のみ処理する。
+			if(indexSelected >= 0){
+			
+				// テーブルからコマンドオブジェクトを生成する
+				var oTable = $('#example').dataTable();
+				// 選択コマンドの情報を取得する。
+				var idx = oTable.fnGetData(indexSelected, 0);
+				// 下へ移動するように数値を計算する。
+				oTable.fnUpdate( idx + offset, indexSelected , 0 );
+				// 更新
+				remap();
+				// 状態保存する
+				saveDataTable("def_data");
+			}
 		}
 		
 		// 
