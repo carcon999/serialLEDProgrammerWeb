@@ -1,3 +1,8 @@
+
+const DEF_UP_OFFSET = -10;
+const DEF_DOWN_OFFSET = 10;
+
+
 function initDataTable() {
 	
 	var table = $('#example').dataTable({
@@ -73,6 +78,52 @@ function loadDataTable(keyName) {
 			// テーブル追加
 			oTable.fnAddData(obj, true);
 		}
+	}
+}
+
+// 
+// 上移動
+// 
+// TODO
+function recordUp() {
+	updown(DEF_UP_OFFSET);
+}
+
+// 
+// 下移動
+// 
+// TODO
+function recordDown() {
+	updown(DEF_DOWN_OFFSET);
+}
+
+// 
+// 上下移動処理
+// 
+function updown(offset) {
+	// あとで
+	// 選択行インデックスを待避
+	var indexSelected = $('#example').DataTable().row('.selected').index();
+
+	// 選択されている場合のみ処理する。
+	if(indexSelected >= 0){
+	
+		// テーブルからコマンドオブジェクトを生成する
+		var oTable = $('#example').dataTable();
+		// 選択コマンドの情報を取得する。
+		var idx = oTable.fnGetData(indexSelected, 0);
+
+		// 交換する位置を検索し見つかる場合は入れ替えを実施する。
+		$.each( oTable.fnGetData(), function(i, row){
+			if(row[0] == (idx + offset)){
+				oTable.fnUpdate( idx, i , 0 );
+				oTable.fnUpdate( idx + offset, indexSelected , 0 );
+				return false;
+			}
+		});
+
+		// 状態保存する
+		saveDataTable("def_data");
 	}
 }
 
