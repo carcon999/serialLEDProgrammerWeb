@@ -299,7 +299,10 @@
 			
 			// 行削除
 			api.row('.selected').remove().draw();
-			
+
+			// インデックス振り直し
+			remap();
+
 			// 選択対象行の判定〜行選択
 			indexLast = api.data().length -1
 			api.$('tr').eq( Math.min(indexSelected, indexLast) ).addClass('selected');

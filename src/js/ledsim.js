@@ -68,6 +68,8 @@ function led_play(){
 
 		//関数led_play_timer()を1ミリ秒間隔で呼び出す
 		g_timer = setInterval("led_play_timer()",1);
+
+		$('#simdlg').dialog({width : 50 + ledsToUse*32});
 	}
 }
 
