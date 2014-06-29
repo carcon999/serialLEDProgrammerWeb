@@ -36,7 +36,10 @@ serialLEDProgrammer For Web
 5. Arduino IDEでスケッチ書き込みをします。
 6. 成功するとLED演出が確認できます。
 
-![Image](https://raw.githubusercontent.com/carcon999/serialLEDProgrammerWeb/master/image/ring.png)  
+![Image](https://raw.githubusercontent.com/carcon999/serialLEDProgrammerWeb/master/image/ring.jpg)  
+
+※実行するためにはA別途rduino用ライブラリが必要になります。
+　ライブラリ[SerialLedController](https://github.com/carcon999/SerialLedController)も公開していますのでインストールしてご利用ください。
 
 ### その他
 
