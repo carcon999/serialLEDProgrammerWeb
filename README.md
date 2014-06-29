@@ -27,7 +27,10 @@ serialLEDProgrammer For Web
 
 ![Image](https://raw.githubusercontent.com/carcon999/serialLEDProgrammerWeb/master/image/sim.png)  
 
-#### Arduino動作確認
+※ １行目には必ずSystemの定義を入れるようにしてください。（LED数等の重要な情報です。）  
+※ パラメータの詳細は、[コマンド仕様書](https://dl.dropboxusercontent.com/u/71549646/external/LedUartCommands.pdf)を参照してください。
+
+### Arduino動作確認
 
 1. 先のシミュレーションで演出を作ります。
 2. [ソース生成]ボタンでArduino用コードを生成します。
@@ -38,10 +41,9 @@ serialLEDProgrammer For Web
 
 ![Image](https://raw.githubusercontent.com/carcon999/serialLEDProgrammerWeb/master/image/ring.jpg)  
 
-※実行するためにはA別途rduino用ライブラリが必要になります。
-　ライブラリ[SerialLedController](https://github.com/carcon999/SerialLedController)も公開していますのでインストールしてご利用ください。
-
-### その他
+※実行するためにはArduino用ライブラリが必要になります。  
+[SerialLedController](https://github.com/carcon999/SerialLedController)を公開していますのでインストールしてご利用ください。
+### 姉妹アプリのWindows版について
 
 姉妹アプリケーションとして、Windowsアプリケーションがあります。Windowsアプリでは、シリアル通信を利用してダイレクトな演出確認が行えますが、基本的なオペレーションは同等です。詳細については下記を参照してください。
 
@@ -50,4 +52,3 @@ serialLEDProgrammer For Web
 ### UIデザインについて
 
 本アプリケーションは、[tgck](https://github.com/tgck)さんのご協力で作成することができました。ありがとうございました。
-
