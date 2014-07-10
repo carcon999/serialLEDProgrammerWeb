@@ -195,6 +195,10 @@ CmdLoop.prototype.play = function(playinfo)
   // Loop
   if(playinfo.loop_count == 0)
   {
+    // 無限ループ
+    if(this.count == 0){
+      playinfo.index=0;
+    }
     playinfo.loop_count = this.count;
   }
   else
